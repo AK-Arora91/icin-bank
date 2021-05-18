@@ -11,7 +11,7 @@
 	<groupId>org.teksystems</groupId>
 	<artifactId>icin_bank</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>icin_bank</name>
 	<description>online banking web application</description>
 	<properties>
