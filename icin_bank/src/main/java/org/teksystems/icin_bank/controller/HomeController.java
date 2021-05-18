@@ -1,12 +1,19 @@
 package org.teksystems.icin_bank.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.teksystems.icin_bank.service.UserTransactionsService;
 
 @Controller
 public class HomeController {
 
+	@Autowired
+	UserTransactionsService userTransactionsService;
+	
 	@RequestMapping("/")
     public String home() {
         return "home";
@@ -45,5 +52,14 @@ public class HomeController {
 	@RequestMapping("/RequestChequeBook")
     public String requestChequeBook(ModelMap map) {
         return "RequestChequeBook";
+    }
+	
+	@RequestMapping(value="UserTransactions",method=RequestMethod.GET)
+    public String userTransactions(@RequestParam("account-number")String accountNumber,
+    		ModelMap map) {
+		
+		map.addAttribute("userTransactions", userTransactionsService.getUserTransactions(accountNumber));
+        
+		return "UserTransactions";
     }
 }

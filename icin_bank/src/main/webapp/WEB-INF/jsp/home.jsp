@@ -31,7 +31,7 @@
 	        <a class="nav-link" href="WithdrawMoney" target="iframe">Withdraw money</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="UserTransactions" target="iframe">Transactions</a>
+	        <a class="nav-link" href="UserTransactions?account-number=${user.accountNumber}" target="iframe">Transactions</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="UserBalance?id=${user.id}" target="iframe">Balance</a>

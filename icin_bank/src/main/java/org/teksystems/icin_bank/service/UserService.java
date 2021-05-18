@@ -46,4 +46,9 @@ public class UserService {
 		return u>0;
 		
 	}
+	
+	@Transactional
+	public User getUserByAccountNumber(String accountNumber) {
+		return userRepository.findUserByAccountNumber(accountNumber);
+	}
 }
