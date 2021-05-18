@@ -25,48 +25,25 @@
 	        <a class="nav-link" href="/HomeBackground" target="iframe">Home <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="DepositMoney" target="iframe">Deposit Money</a>
+	        <a class="nav-link" href="GrantAccess" target="iframe">Grant Access</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="WithdrawMoney" target="iframe">Withdraw money</a>
+	        <a class="nav-link" href="BlockAccount" target="iframe">Block The User Account</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="UserTransactions?account-number=${user.accountNumber}" target="iframe">Transactions</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="UserBalance?id=${user.id}" target="iframe">Balance</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="TransferFunds" target="iframe">Transfer funds</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="RequestChequeBook" target="iframe">Request cheque books</a>
+	        <a class="nav-link" href="ChequeBookRequests" target="iframe">Cheque Book Requests</a>
 	      </li>
 	    </ul>
-	    <% 
-	    if(request.getAttribute("user")!=null){
-	    %>
-	    <span style="align-content: right;padding-right: 10px;">Welcome ${user.name}</span>
-	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="align-content: right">
-	      <li class="nav-item">
-	        <a class="nav-link" href="/">Logout</a>
-	      </li>
-	    </ul>
-	    <% 
-	    }
-	    else{
-	    %>
-		<ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="align-content: right">
-	      <li class="nav-item">
-	        <a class="nav-link" href="UserLogin">User Login</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="AdminLogin">Admin Login</a>
-	      </li>
-	    </ul>
-	   	<%
-	    }
-	   	%>    
+	    
+	    
+		    <span style="text-align: right;">Welcome Admin</span>
+		<div style="text-align: right;padding-right:100px;">
+		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		      <li class="nav-item">
+		        <a class="nav-link" href="/">Logout</a>
+		      </li>
+		    </ul> 
+	    </div>
 	  </div>
 	</nav>
 	<iframe src="HomeBackground" style="height:590px;width:100%;" name="iframe"></iframe>

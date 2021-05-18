@@ -62,4 +62,9 @@ public class HomeController {
         
 		return "UserTransactions";
     }
+	
+	@RequestMapping("/AdminLogin")
+    public String adminLogin() {
+        return "AdminLogin";
+    }
 }
