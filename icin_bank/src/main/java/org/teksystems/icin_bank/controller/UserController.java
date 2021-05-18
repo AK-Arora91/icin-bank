@@ -6,8 +6,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.teksystems.icin_bank.model.GrantAccess;
 import org.teksystems.icin_bank.model.User;
 import org.teksystems.icin_bank.model.UserTransactions;
+import org.teksystems.icin_bank.service.GrantAccessService;
 import org.teksystems.icin_bank.service.UserService;
 import org.teksystems.icin_bank.service.UserTransactionsService;
 
@@ -18,6 +20,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private UserTransactionsService userTransactionsService;
+	@Autowired
+	private GrantAccessService grantAccessService;
 	
 	@RequestMapping(value="UserRegister",method =RequestMethod.POST)
 	public String userRegister(@RequestParam("name")String name,
@@ -61,6 +65,7 @@ public class UserController {
 			map.addAttribute("message","Amount Deposited Successfully");
 			User user=userService.getUserByAccountNumber(accountNumber);
 			userTransactionsService.saveUserTransactions(new UserTransactions(accountNumber,"deposit",amount,user.getBalance()));
+			grantAccessService.saveGrantAccess(new GrantAccess(accountNumber,"deposit",amount,user.getBalance()-amount));
 		}
 		else
 			map.addAttribute("message","Invalid Details");
@@ -76,6 +81,8 @@ public class UserController {
 			User user=userService.getUserByAccountNumber(accountNumber);
 			userTransactionsService.saveUserTransactions(
 			new UserTransactions(accountNumber,"Withdraw",amount,user.getBalance()));
+			grantAccessService.saveGrantAccess(
+			new GrantAccess(accountNumber,"withdraw",amount,user.getBalance()+amount));
 		}
 		else
 			map.addAttribute("message","Invalid Details");
@@ -92,6 +99,8 @@ public class UserController {
 			User user=userService.getUserByAccountNumber(accountNumber1);
 			userTransactionsService.saveUserTransactions(
 					new UserTransactions(accountNumber1,"withdraw",amount,user.getBalance()));
+			grantAccessService.saveGrantAccess(
+			new GrantAccess(accountNumber1,"transfer",amount,user.getBalance()+amount));
 			User user2=userService.getUserByAccountNumber(accountNumber2);
 			userTransactionsService.saveUserTransactions(new UserTransactions(accountNumber2,"deposit",amount,user2.getBalance()));
 		}
@@ -102,7 +111,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/requestChequeBook")
-    public String requestChequeBook(ModelMap map) {
+    public String requestChequeBook(@RequestParam("account-number")String accountNumber,ModelMap map) {
+		grantAccessService.saveGrantAccess(
+		new GrantAccess(accountNumber,"chequeBookRequests"));
 		map.addAttribute("message", "Cheque book will be delivered at your home within 1 month");
         return "RequestChequeBook";
     }

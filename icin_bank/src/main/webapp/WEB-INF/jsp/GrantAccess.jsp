@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!doctype html> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -13,41 +14,43 @@
     <title>ICIN Bank</title>
   </head>
   <body style="background:lightgreen">
-  
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-	
-	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="/HomeBackground" target="iframe">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="GrantAccess" target="iframe">Grant Access</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="Users" target="iframe">Block The User Account</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="ChequeBookRequests" target="iframe">Cheque Book Requests</a>
-	      </li>
-	    </ul>
-	    
-	    
-		    <span style="text-align: right;">Welcome Admin</span>
-		<div style="text-align: right;padding-right:100px;">
-		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-		      <li class="nav-item">
-		        <a class="nav-link" href="/">Logout</a>
-		      </li>
-		    </ul> 
-	    </div>
-	  </div>
-	</nav>
-	<iframe src="HomeBackground" style="height:590px;width:100%;" name="iframe"></iframe>
-	
+    
+    <div style="padding:20px;">
+    	<h2>Grant Access</h2>
+    	<br>
+    	<table class="table table-bordered table-hover" style="width: 60%">
+    	<thead class="thead-dark">
+			<tr>
+				<th>Account Number</th>
+				<th>Date</th>
+				<th>Action</th>
+				<th>Amount</th>
+				<th>Current balance</th>
+				<th>Access</th>
+			</tr>
+		</thead>
+		<tbody class="bg-warning">
+			<c:forEach var="request" items="${grantAccess}">
+			
+				<tr>
+					<td> ${request.accountNumber} </td>
+					<td> ${request.date} </td>
+					<td> ${request.action} </td>
+					<td> ${request.amount} </td>
+					<td> ${request.currentBalance} </td>
+					<td>
+						<a href="request?id=${request.id}">Accept</a>&nbsp;&nbsp;&nbsp;
+						<a href="request?id=${request.id}">Reject</a>
+					</td>
+				</tr>
+			
+			</c:forEach>
+		</tbody>
+		</table>
+    	
+    	
+    </div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
